@@ -1,3 +1,4 @@
+
 package SearchBook.Presentation;
 
 import java.util.List;
@@ -18,14 +19,18 @@ public class SearchOp {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Gets the search keyword and displays matching books.
+     */
     public void searchBook() {
 
         System.out.println("===== Search Book =====");
-        System.out.print("Enter book title or ID: ");
+        System.out.print("Enter book title, author, ISBN, or ID: ");
 
         String keyword = scanner.nextLine();
 
-        List<Book> results = searchBookService.searchBook(keyword);
+        List<Book> results =
+                searchBookService.searchBook(keyword);
 
         if (results.isEmpty()) {
             System.out.println("No books found.");
@@ -38,6 +43,9 @@ public class SearchOp {
                 System.out.println("-------------------------");
                 System.out.println("Book ID: " + book.getBookId());
                 System.out.println("Title: " + book.getTitle());
+                System.out.println("Author: " + book.getAuthor());
+                System.out.println("ISBN: " + book.getIsbn());
+
                 System.out.println(
                         "Availability: " +
                         (book.isAvailable() ? "Available" : "Borrowed")

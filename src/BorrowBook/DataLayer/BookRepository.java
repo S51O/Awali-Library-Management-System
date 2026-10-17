@@ -1,3 +1,4 @@
+
 package BorrowBook.DataLayer;
 
 import BorrowBook.Models.Book;
@@ -8,104 +9,114 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Handles reading book data from book.txt.
+ * Reads book records from the shared text file and updates
+ * book availability for Borrow Book and Return Book.
  */
 public class BookRepository {
 
     private final String FILE_NAME =
             "src/BorrowBook/DataLayer/book";
 
+    /**
+     * Reads all book records from the text file.
+     *
+     * @return a list of books
+     */
     public List<Book> getAllBooks() {
 
         List<Book> books = new ArrayList<>();
 
-        try {
-
-            BufferedReader reader =
-                    new BufferedReader(new FileReader(FILE_NAME));
+        try (BufferedReader reader =
+                     new BufferedReader(new FileReader(FILE_NAME))) {
 
             String line;
 
             while ((line = reader.readLine()) != null) {
 
-                String[] data = line.split(",");
+                String[] data = line.split(",", -1);
 
-                int id = Integer.parseInt(data[0]);
-                String title = data[1];
-                boolean available = Boolean.parseBoolean(data[2]);
+                if (data.length < 5) {
+                    continue;
+                }
 
-                books.add(new Book(id, title, available));
-            }
+                int id = Integer.parseInt(data[0].trim());
+                String title = data[1].trim();
+                String author = data[2].trim();
+                String isbn = data[3].trim();
+                boolean available =
+                        Boolean.parseBoolean(data[4].trim());
 
-            reader.close();
+                books.add(new Book(
+                        id, title, author, isbn, available ));
+                 
+                    }
 
         } catch (IOException e) {
-
-            System.out.println("Error reading book file.");
+            System.out.println("Error reading book file: "
+                    + e.getMessage());
         }
 
         return books;
     }
 
+    /**
+     * Finds a book using its ID.
+     *
+     * @param bookId the ID of the book
+     * @return the matching book, or null if not found
+     */
     public Book getBookById(int bookId) {
 
-        List<Book> books = getAllBooks();
-
-        for (Book book : books) {
-
+        for (Book book : getAllBooks()) {
             if (book.getBookId() == bookId) {
-
                 return book;
             }
         }
 
         return null;
     }
+
+    /**
+     * Marks a book as borrowed.
+     *
+     * @param bookId the ID of the book to borrow
+     */
     public void updateBookStatus(int bookId) {
-
-        List<Book> books = getAllBooks();
-
         try {
-
-            FileWriter writer =
-                    new FileWriter(FILE_NAME);
-
-            for (Book book : books) {
-
-                if (book.getBookId() == bookId) {
-                    book.setAvailable(false);
-                }
-
-                writer.write(
-                        book.getBookId() + "," +
-                                book.getTitle() + "," +
-                                book.isAvailable() +
-                                System.lineSeparator()
-                );
-            }
-
-            writer.close();
-
+            updateAvailability(bookId, false);
         } catch (IOException e) {
-
-            System.out.println("Error updating book.");
+            System.out.println("Error updating book: "
+                    + e.getMessage());
         }
     }
-    
+
     /**
-     * Updates a returned book's availability to true.
-     * Used by the Return Book function.
+     * Marks a returned book as available.
      *
-     * @param bookId ID of the returned book.
-     * @return true if the book was updated successfully.
+     * @param bookId the ID of the returned book
+     * @return true if the book was found and updated
+     * @throws IOException if reading or writing fails
      */
     public boolean updateBookAsAvailable(int bookId)
             throws IOException {
+        return updateAvailability(bookId, true);
+    }
+
+    /**
+     * Updates availability while preserving the book ID,
+     * title, author, and ISBN.
+     *
+     * @param bookId the ID of the book to update
+     * @param available the new availability status
+     * @return true if the book was found and updated
+     * @throws IOException if reading or writing fails
+     */
+    private boolean updateAvailability(
+            int bookId, boolean available) throws IOException {
 
         Path path = Path.of(FILE_NAME);
 
@@ -118,26 +129,19 @@ public class BookRepository {
 
             String[] data = line.split(",", -1);
 
-            if (data.length < 3) {
+            if (data.length < 5) {
                 updatedLines.add(line);
                 continue;
             }
 
-            int storedBookId =
-                    Integer.parseInt(data[0].trim());
+            int storedId = Integer.parseInt(data[0].trim());
 
-            if (storedBookId == bookId) {
-
-                updatedLines.add(
-                        data[0] + "," +
-                        data[1] + ",true"
-                );
-
+            if (storedId == bookId) {
+                data[4] = String.valueOf(available);
                 found = true;
-
-            } else {
-                updatedLines.add(line);
             }
+
+            updatedLines.add(String.join(",", data));
         }
 
         if (found) {
@@ -146,5 +150,4 @@ public class BookRepository {
 
         return found;
     }
-
 }

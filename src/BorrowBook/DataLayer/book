@@ -1,20 +1,20 @@
-1,Java Programming,false
-2,Database Systems,true
-3,Software Engineering,true
-4,Object Oriented Analysis,true
-5,Data Structures,true
-6,Algorithms,true
-7,Computer Networks,true
-8,Operating Systems,true
-9,Artificial Intelligence,true
-10,Machine Learning,true
-11,Cyber Security,true
-12,Web Development,true
-13,Cloud Computing,true
-14,Mobile Application Development,true
-15,Discrete Mathematics,true
-16,Computer Graphics,true
-17,Human Computer Interaction,true
-18,Digital Logic Design,true
-19,Information Systems,true
-20,Project Management,true
+1,Java Programming,John Smith,9780135166307,false
+2,Database Systems,Thomas Connolly,9780132943260,true
+3,Software Engineering,Ian Sommerville,9780133943030,true
+4,Object Oriented Analysis,Grady Booch,9780201895513,true
+5,Data Structures,Mark Allen Weiss,9780132847377,true
+6,Algorithms,Thomas H. Cormen,9780262046305,true
+7,Computer Networks,Andrew S. Tanenbaum,9780132126953,true
+8,Operating Systems,Abraham Silberschatz,9781119800361,true
+9,Artificial Intelligence,Stuart Russell,9780134610993,true
+10,Machine Learning,Tom M. Mitchell,9780070428072,true
+11,Cyber Security,William Stallings,9780134794105,true
+12,Web Development,Jon Duckett,9781118907443,true
+13,Cloud Computing,Thomas Erl,9780133387520,true
+14,Mobile Application Development,Jeff McWherter,9781119017929,true
+15,Discrete Mathematics,Kenneth H. Rosen,9781259676512,true
+16,Computer Graphics,Donald Hearn,9780132215017,true
+17,Human Computer Interaction,Alan Dix,9780130461094,true
+18,Digital Logic Design,Morris Mano,9780134549897,true
+19,Information Systems,John Gallaugher,9781938162052,true
+20,Project Management,Jeffrey K. Pinto,9780133798074,true

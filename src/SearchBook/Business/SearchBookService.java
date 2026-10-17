@@ -7,7 +7,7 @@ import SearchBook.Data.BookData;
 
 /**
  * Business layer for the Search Book use case.
- * Coordinates the search request with the data layer.
+ * Handles search requests and communicates with the data layer.
  */
 public class SearchBookService {
 
@@ -21,9 +21,9 @@ public class SearchBookService {
     }
 
     /**
-     * Requests books matching the given keyword.
+     * Searches for books by title, author, ISBN, or ID.
      *
-     * @param keyword the title, author, or ISBN to search for
+     * @param keyword the search keyword
      * @return a list of matching books
      */
     public List<Book> searchBook(String keyword) {

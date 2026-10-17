@@ -1,8 +1,9 @@
 
 package ReturnBook.presentation;
 
-import ReturnBook.business.ReturnService;
 import java.util.Scanner;
+
+import ReturnBook.business.ReturnService;
 
 /**
  * Handles user interaction for returning books.
