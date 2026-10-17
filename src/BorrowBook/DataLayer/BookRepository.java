@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,4 +96,55 @@ public class BookRepository {
             System.out.println("Error updating book.");
         }
     }
+    
+    /**
+     * Updates a returned book's availability to true.
+     * Used by the Return Book function.
+     *
+     * @param bookId ID of the returned book.
+     * @return true if the book was updated successfully.
+     */
+    public boolean updateBookAsAvailable(int bookId)
+            throws IOException {
+
+        Path path = Path.of(FILE_NAME);
+
+        List<String> lines = Files.readAllLines(path);
+        List<String> updatedLines = new ArrayList<>();
+
+        boolean found = false;
+
+        for (String line : lines) {
+
+            String[] data = line.split(",", -1);
+
+            if (data.length < 3) {
+                updatedLines.add(line);
+                continue;
+            }
+
+            int storedBookId =
+                    Integer.parseInt(data[0].trim());
+
+            if (storedBookId == bookId) {
+
+                updatedLines.add(
+                        data[0] + "," +
+                        data[1] + ",true"
+                );
+
+                found = true;
+
+            } else {
+                updatedLines.add(line);
+            }
+        }
+
+        if (found) {
+            Files.write(path, updatedLines);
+        }
+
+        return found;
+    }
+
 }

@@ -3,8 +3,7 @@ package BorrowBook.BusinessLayer;
 import BorrowBook.DataLayer.BookRepository;
 import BorrowBook.DataLayer.LoanRecordRepository;
 import BorrowBook.Models.Book;
-import BorrowBook.Models.LoanRecord;
-
+import model.LoanRecord;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

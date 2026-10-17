@@ -1,50 +1,29 @@
-
 package SearchBook.Data;
 
 /**
- * Represents a book in the library.
- * Stores its title, author, ISBN, and availability.
+ * Represents a book displayed in search results.
  */
 public class Book {
 
+    private int bookId;
     private String title;
-    private String author;
-    private String isbn;
-    private String availability;
+    private boolean available;
 
-    /**
-     * Creates a book with the provided details.
-     *
-     * @param title the book title
-     * @param author the book author
-     * @param isbn the book ISBN
-     * @param availability the current availability status
-     */
-    public Book(String title, String author, String isbn,
-                String availability) {
+    public Book(int bookId, String title, boolean available) {
+        this.bookId = bookId;
         this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.availability = availability;
+        this.available = available;
     }
 
-    /** @return the book title */
+    public int getBookId() {
+        return bookId;
+    }
+
     public String getTitle() {
         return title;
     }
 
-    /** @return the book author */
-    public String getAuthor() {
-        return author;
-    }
-
-    /** @return the book ISBN */
-    public String getIsbn() {
-        return isbn;
-    }
-
-    /** @return the book availability status */
-    public String getAvailability() {
-        return availability;
+    public boolean isAvailable() {
+        return available;
     }
 }
