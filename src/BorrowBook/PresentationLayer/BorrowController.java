@@ -30,7 +30,5 @@ public class BorrowController {
         return borrowService.getAllBooks();
     }
 
-    public List<Book> getRecommendedBooks() {
-        return borrowService.getRecommendedBooks();
-    }
+
 }

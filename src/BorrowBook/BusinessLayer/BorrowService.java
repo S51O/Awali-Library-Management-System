@@ -48,23 +48,6 @@ public class BorrowService {
         return bookRepository.getAllBooks();
     }
 
-    /**
-     * Recommends available books to the member.
-     */
-    public List<Book> getRecommendedBooks() {
 
-        List<Book> recommendations = new ArrayList<>();
 
-        for (Book book : bookRepository.getAllBooks()) {
-            if (book.isAvailable()) {
-                recommendations.add(book);
-            }
-
-            if (recommendations.size() == 4) {
-                break;
-            }
-        }
-
-        return recommendations;
-    }
 }
