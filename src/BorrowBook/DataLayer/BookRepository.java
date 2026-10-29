@@ -5,7 +5,6 @@ import BorrowBook.Models.Book;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,8 +17,15 @@ import java.util.List;
  */
 public class BookRepository {
 
-    private final String FILE_NAME =
-            "src/BorrowBook/DataLayer/book";
+    private final String FILE_NAME;
+
+public BookRepository() {
+    this("src/BorrowBook/DataLayer/book");
+}
+
+public BookRepository(String fileName) {
+    this.FILE_NAME = fileName;
+}
 
     /**
      * Reads all book records from the text file.

@@ -15,8 +15,15 @@ import java.util.ArrayList;
  */
 public class LoanRecordRepository {
 
-    private final String FILE_NAME =
-            "src/BorrowBook/DataLayer/loans";
+    private final String FILE_NAME;
+
+public LoanRecordRepository() {
+    this("src/BorrowBook/DataLayer/loans");
+}
+
+public LoanRecordRepository(String fileName) {
+    this.FILE_NAME = fileName;
+}
 
     /**
      * Saves a new borrowing record to the loans file.
