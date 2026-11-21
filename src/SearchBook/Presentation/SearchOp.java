@@ -25,7 +25,7 @@ public class SearchOp {
     public void searchBook() {
 
         System.out.println("===== Search Book =====");
-        System.out.print("Enter book title, author, ISBN, or ID: ");
+        System.out.print("Enter book title, author, or ISBN ");
 
         String keyword = scanner.nextLine();
 
