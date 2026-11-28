@@ -11,6 +11,8 @@ import java.time.LocalDate;
  * Handles the business logic for returning books.
  * Validates the return and communicates with the data layer.
  */
+
+// Handles the book return operations.
 public class ReturnService {
 
     private ReturnRepository returnRepository;
